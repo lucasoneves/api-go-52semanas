@@ -1,21 +1,16 @@
 package main
 
 import (
+	"api/models"
+	"api/routes"
 	"fmt"
-	"log"
-	"net/http"
 )
 
-func Home(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Home Page")
-}
-
-func HandleRequest() {
-	http.HandleFunc("/", Home)
-	log.Fatal(http.ListenAndServe(":8000", nil))
-}
-
 func main() {
+	models.Player = []models.Players{
+		{Name: "Weverton", History: "Historia", ShirtNumber: 21},
+		{Name: "Piquerez", History: "História do Piquerez", ShirtNumber: 22},
+	}
 	fmt.Println("Server is listening on")
-	HandleRequest()
+	routes.HandleRequest()
 }
