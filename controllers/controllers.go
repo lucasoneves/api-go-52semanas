@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"api/database"
 	"api/models"
 	"encoding/json"
 	"fmt"
@@ -14,7 +15,9 @@ func Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func ShowAllPlayers(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(models.Player)
+	var p []models.Players
+	database.DB.Find(&p)
+	json.NewEncoder(w).Encode(p)
 }
 
 func PlayerDetail(w http.ResponseWriter, r *http.Request) {
