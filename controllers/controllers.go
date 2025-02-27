@@ -23,10 +23,7 @@ func ShowAllPlayers(w http.ResponseWriter, r *http.Request) {
 func PlayerDetail(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
-
-	for _, player := range models.Player {
-		if player.Id == id {
-			json.NewEncoder(w).Encode(player)
-		}
-	}
+	var player models.Players
+	database.DB.First(&player, id)
+	json.NewEncoder(w).Encode(player)
 }
