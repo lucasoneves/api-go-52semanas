@@ -27,3 +27,10 @@ func PlayerDetail(w http.ResponseWriter, r *http.Request) {
 	database.DB.First(&player, id)
 	json.NewEncoder(w).Encode(player)
 }
+
+func CriarPlayer(w http.ResponseWriter, r *http.Request) {
+	var newPlayer models.Players
+	json.NewDecoder(r.Body).Decode(&newPlayer)
+	database.DB.Create(&newPlayer)
+	json.NewEncoder(w).Encode(newPlayer)
+}
