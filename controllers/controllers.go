@@ -34,3 +34,11 @@ func CriarPlayer(w http.ResponseWriter, r *http.Request) {
 	database.DB.Create(&newPlayer)
 	json.NewEncoder(w).Encode(newPlayer)
 }
+
+func DeletePlayer(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+	var player models.Players
+	database.DB.Delete(&player, id)
+	json.NewEncoder(w).Encode(player)
+}
