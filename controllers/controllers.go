@@ -42,3 +42,13 @@ func DeletePlayer(w http.ResponseWriter, r *http.Request) {
 	database.DB.Delete(&player, id)
 	json.NewEncoder(w).Encode(player)
 }
+
+func EditaPlayer(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+	var player models.Players
+	database.DB.First(&player, id)
+	json.NewDecoder(r.Body).Decode(&player)
+	database.DB.Save(&player)
+	json.NewEncoder(w).Encode(player)
+}
