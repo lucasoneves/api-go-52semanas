@@ -14,6 +14,6 @@ func main() {
 	}
 	database.ConnectWithDB()
 
-	fmt.Println("Server is listening on")
+	fmt.Println("Server is listening on port 8000")
 	routes.HandleRequest()
 }
